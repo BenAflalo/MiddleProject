@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="header">Login page</h1>
+
+        <form onsubmit="login(event)">
+            <div class="input-wrapper">
+                <label for="email">Email: </label>
+                <input type="text" id="email" name="email" />
+            </div>
+            <div class="input-wrapper">
+                <label for="password">Password: </label>
+                <input type="text" id="password" name="password" />
+            </div>
+            <button>Login</button>
+        </form>
+
+        <small>
+            Dont have an account?
+            <a href="register.html">Signup</a>
+        </small>
+    </div>
+
+    <script src="js/storageService.js"></script>
+    <script src="js/client.js"></script>
+</body>
+
+</html>

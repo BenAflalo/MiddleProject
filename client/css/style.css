@@ -1,0 +1,49 @@
+:root {
+    --bg-color: #51e2f5;
+    --bg-main: #9df9ef;
+    --bg-input: #edf7F6;
+    --bg-other: #ffa8B6;
+    --bg-buttons: #A28089;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bg-color);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--bg-main);
+}
+
+input {
+    outline: none;
+    border: none;
+    background-color: var(--bg-input);
+}
+
+.product-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: var(--bg-other);
+    padding: 5px;
+    margin: 5px;
+}
