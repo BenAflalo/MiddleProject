@@ -1,25 +1,15 @@
 "use strict"
 
-async function login(event) { // change in to email and not username
+async function login(event) {
     try {
         event.preventDefault()
-        const email = document.getElementById("email").value
-        const password = document.getElementById("password").value
+        const form = event.target
+        const formData = getFormData(form)
+        const { password, email } = formData
 
         if (email === "" || password === "") return
-
-        const response = await fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        })
-
-        const data = await response.json()
-
-        if (!data.success) {
-            alert(data.message)
-            return
-        }
+        const user = {email, password}
+        const data = await makeFetchRequest("/api/login", "POST",user)
 
         const loggedInUser = data.user
         storageService.setUser(loggedInUser)
@@ -33,10 +23,9 @@ async function login(event) { // change in to email and not username
 async function signup(event) {
     try {
         event.preventDefault()
-
-        const username = document.getElementById("username").value
-        const password = document.getElementById("password").value
-        const email = document.getElementById("email").value
+        const form = event.target
+        const formData = getFormData(form)
+        const { username, password, email } = formData
 
         if (username === "" || password === "" || email === "") {
             alert("Something went wrong!😓")
@@ -48,23 +37,9 @@ async function signup(event) {
             password,
             email,
         }
-
-        const response = await fetch("/api/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credentials),
-        })
-        
-        const data = await response.json()
-        if (!data.success) {
-            alert(data.message)
-            return
-        } else{
-            window.location.href = "login.html"
-
-        }
-        
-
+        const data = await makeFetchRequest("/api/register", "POST",credentials)
+       
+        window.location.href = "login.html"
     } catch (error) {
         console.log(error)
     }
@@ -81,7 +56,7 @@ async function addProduct(event) {
         const form = event.target
         const formData = getFormData(form)
         const { productName, productPrice } = formData
-        // console.log(productPrice)
+
         if (productName === "" || productPrice === "") {
             alert("Something went wrong!😓")
             return
@@ -92,20 +67,15 @@ async function addProduct(event) {
             productName
         }
         const data = await makeFetchRequest("/api/newProduct", "POST",product)
-        // const response = await fetch("/api/newProduct", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(product),
-        // })
-
-        // const data = await response.json()
-        // if (!data.success) return alert(data.message)
 
         const products = data.allProducts 
         renderProducts(products)
 
     } catch (error) {
         console.log(error)
+    } finally{
+        document.getElementById("productName").value = ""
+        document.getElementById("productPrice").value = ""
     }
 }
 
@@ -117,12 +87,9 @@ async function init() {
             return
         }
 
-        const response = await fetch("/api/home") 
-        const data = await response.json()
-        if (!data.success) return alert(data.message)
+        const data = await makeFetchRequest("/api/home") 
 
         const products = data.allProducts 
-        // console.log(products)
         renderProducts(products)
     } catch (error) {
         console.log(error)
@@ -168,15 +135,12 @@ function getFormData(form) {
 
   async function addToCart(id) {
     const data = await makeFetchRequest("/api/cart", "POST",{id})
-    // console.log(data.product)
     storageService.addProductToCart(data.product)
-    
   }
 
   async function chooseFilter() {
     try {
         const filter = document.getElementById("select").value
-        // console.log(filter)
         if(filter === "price"){
             filterByPrice()
         }else{
@@ -192,31 +156,54 @@ function getFormData(form) {
  async function filterByPrice() {
     try {
         const data = await makeFetchRequest("/api/filterByPrice")
-        // const response = await fetch("/api/filterByPrice")
-        // console.log(response)
-        // const data = await response.json()
-        // if (!data.success) return alert(data.message)
         const products = data.allFilteredProducts 
         renderProducts(products)
     } catch (error) {
         console.log(error)
     }
-  }
-  async function filterByName(){
-    const data = await makeFetchRequest("/api/filterByName")
-    // const response = await fetch("/api/filterByName")
-    // const data = await response.json()
-    //     if (!data.success) return alert(data.message)
+}
+
+async function filterByName(){
+    try {
+        const data = await makeFetchRequest("/api/filterByName")
         const products = data.allFilteredProducts 
         renderProducts(products)
+    } catch (error) {
+        console.log(error)
+        
+    }
   }
-  async function redirect() {
-    const response = await fetch("/buy")
+
+  async function redirectToBuy() { //not finished
+    try {
+        const products = storageService.getProducts()
+        const totalProducts = products.length
+        const totalPrice = products.reduce((a,b)=> a+b.price,0)
+        const message = generateMessage(totalProducts,totalPrice)
+        storageService.saveMessage(message)
+        const data = await makeFetchRequest("/buy")
+    
+        window.location.href = "/buy"
+        
+    } catch (error) {
+        
+    }finally{
+        
+    }
     
   }
 
-
-
+  function generateMessage(totalProducts, totalPrice){
+    return `
+    <h1>SV-shop</h1>
+    <p>Total product: ${totalProducts}</p>
+    <p>Total price: ${totalPrice}$</p>
+    <button onclick="saveorder()">Approve</button>
+    `
+}
+async function initBuy() {
+    return storageService.getMessage()
+}
   
 async function cart() {
     const user = storageService.getUser()

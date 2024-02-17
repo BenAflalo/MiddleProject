@@ -2,6 +2,7 @@
 
 const USER_KEY = "loggedInUser"
 const CART_KEY = "cartItems"
+const MSS_KEY = "sumCart"
 
 const storageService = {
     getUser() {
@@ -26,5 +27,12 @@ const storageService = {
         const products = this.getProducts()
         products.push(product)
         this.setProducts(products)
+    },
+    saveMessage(message){
+        localStorage.setItem(MSS_KEY,JSON.stringify(message))
+    },
+    getMessage(){
+        const message = JSON.parse(localStorage.getItem(MSS_KEY))
+        return message
     }
 }

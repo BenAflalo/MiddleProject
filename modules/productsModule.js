@@ -20,15 +20,12 @@ async function getProducts() {
     const collection = await getCollection(entity)
     const products = await collection.find().toArray()
     return products
-
 }
 async function getProductById(id) {
     const collection = await getCollection(entity)
     const mongoID = toObjectId(id)
     const product = await collection.find(mongoID).toArray()
-    // console.log(product)
     return product
-
 }
 
 async function getProductsByPrice() {

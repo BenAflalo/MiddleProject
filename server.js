@@ -20,7 +20,6 @@ app.post("/api/register", async (req, res) => {
     if (!validator.isEmail(email)) {
       throw new Error("email not valid");
     } else {
-      // console.log(validator.isEmail(email))
       await userModule.addUser(email, username, password);
     }
     res.send({ success: true });
@@ -31,7 +30,6 @@ app.post("/api/register", async (req, res) => {
 });
 
 app.post("/api/login", async (req, res) => {
-  // change in to email and not username
   try {
     const { email, password } = req.body;
     const user = await userModule.getUserByUsername(email);
@@ -58,7 +56,6 @@ app.post("/api/newProduct", async (req, res) => {
 app.get("/api/home", async (req, res) => {
   try {
     const allProducts = await productsModule.getProducts();
-    // console.log(allProducts)
     return res.send({ success: true, allProducts });
   } catch (error) {
     console.log(error);
@@ -69,7 +66,8 @@ app.get("/api/home", async (req, res) => {
 app.post("/api/cart", async (req, res) => {
   try {
     const { id } = req.body;
-    const product = await productsModule.getProductById(id);
+    const productArr = await productsModule.getProductById(id)
+    const product = productArr.pop()
     return res.send({ success: true, product });
   } catch (error) {
     console.log(error);
@@ -88,7 +86,6 @@ app.get("/api/filterByPrice", async (req, res) => {
 app.get("/api/filterByName", async (req, res) => {
   try {
     const allFilteredProducts = await productsModule.getProductsByName();
-    // console.log(allFilteredProducts)
     return res.send({ success: true, allFilteredProducts });
   } catch (error) {
     console.log(error);
@@ -96,7 +93,25 @@ app.get("/api/filterByName", async (req, res) => {
   }
 });
 
-app.get("/buy", async (req, res) => {});
+// app.post("/buy", async (req, res) => {
+//   try {
+//     const { totalProducts, totalPrice } = req.body
+//     const message = productsModule.generateMessage(totalProducts, totalPrice)
+//     return res.send({ success: true, message });
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(400).send({ success: false, message: error.message });
+//   }
+// });
+app.get("/buy", async (req, res) => {
+  try {
+    // const message = `<body onload="initBuy()"><h1>SV-shop</h1></body>`
+    // return res.send({ success: true, message })
+    return res.status(200).send(`<body onload="initBuy()"><h1>SV-shop</h1></body>`)
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 const PORT = 3000;
 app.listen(PORT, () => {
