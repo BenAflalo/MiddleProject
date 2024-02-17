@@ -215,6 +215,9 @@ function getFormData(form) {
     
   }
 
+
+
+  
 async function cart() {
     const user = storageService.getUser()
 
