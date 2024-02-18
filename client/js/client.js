@@ -134,7 +134,10 @@ async function makeFetchRequest(url, method = "GET", body = null) {
 
 async function addToCart(id) {
   const data = await makeFetchRequest("/api/cart", "POST", { id });
-  storageService.addProductToCart(data.product);
+  const products = data.product;
+  products.amount = 1;
+  console.log(products);
+  storageService.addProductToCart(products);
 }
 
 async function chooseFilter() {
@@ -171,31 +174,52 @@ async function filterByName() {
 }
 
 async function redirectToBuy() {
-  //not finished
   try {
     const products = storageService.getProducts();
-    const totalProducts = products.length;
-    const totalPrice = products.reduce((a, b) => a + b.price, 0);
-    const message = generateMessage(totalProducts, totalPrice);
-    storageService.saveMessage(message);
-    const data = await makeFetchRequest("/buy");
 
-    window.location.href = "/buy";
+    const productHash = { Banana: 0, gum: 0 };
+    for (let i = 0; i < products.length; i++) {
+      if (productHash[products[i].name]) {
+        productHash[products[i].name]++;
+      }
+    }
+    console.log(productHash);
+    // const filteredProducts = products.map((product) => {
+    //   if (!product._id) {
+    //   } else {
+    //     product.id;
+    //     amount++;
+    //   }
+    // });
+    // console.log(filteredProducts);
+    // window.location.href = "buy.html";
   } catch (error) {
-  } finally {
+    console.log(error);
   }
 }
 
-function generateMessage(totalProducts, totalPrice) {
-  return `
-    <h1>SV-shop</h1>
-    <p>Total product: ${totalProducts}</p>
-    <p>Total price: ${totalPrice}$</p>
-    <button onclick="saveorder()">Approve</button>
-    `;
-}
 async function initBuy() {
-  return storageService.getMessage();
+  const products = storageService.getProducts();
+  const totalProducts = products.length;
+  const totalPrice = products.reduce((a, b) => a + b.price, 0);
+  const strHTMLSs = `
+  <p>Total product: ${totalProducts}</p>
+  <p>Total price: ${totalPrice}$</p>
+  `;
+  document.querySelector(".total-items").innerHTML = strHTMLSs;
+}
+async function saveorder() {
+  try {
+    const products = storageService.getProducts();
+    const user = storageService.getUser();
+    const cartInfo = { products, user };
+    console.log(cartInfo);
+    const data = await makeFetchRequest("/buy", "POST", cartInfo);
+    // window.location.href = "login.html"
+    alert(`your order has been completed`);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function cart() {

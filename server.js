@@ -66,8 +66,8 @@ app.get("/api/home", async (req, res) => {
 app.post("/api/cart", async (req, res) => {
   try {
     const { id } = req.body;
-    const productArr = await productsModule.getProductById(id)
-    const product = productArr.pop()
+    const productArr = await productsModule.getProductById(id);
+    const product = productArr.pop();
     return res.send({ success: true, product });
   } catch (error) {
     console.log(error);
@@ -93,25 +93,34 @@ app.get("/api/filterByName", async (req, res) => {
   }
 });
 
-// app.post("/buy", async (req, res) => {
-//   try {
-//     const { totalProducts, totalPrice } = req.body
-//     const message = productsModule.generateMessage(totalProducts, totalPrice)
-//     return res.send({ success: true, message });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(400).send({ success: false, message: error.message });
-//   }
-// });
+app.post("/buy", async (req, res) => {
+  try {
+    const { user, products } = req.body;
+    const userID = user._id;
+    const username = user.username;
+    await cartsModule.addOrder(userID, username, products);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ success: false, message: error.message });
+  }
+});
 app.get("/buy", async (req, res) => {
   try {
     // const message = `<body onload="initBuy()"><h1>SV-shop</h1></body>`
     // return res.send({ success: true, message })
-    return res.status(200).send(`<body onload="initBuy()"><h1>SV-shop</h1></body>`)
+    // return res
+    //   .status(200)
+    //   .send(`<main onload="initBuy()"><div class="container"></div></main>`);
+    return res.status(200).send(`
+      <h1>SV-shop</h1>
+      <p>Total product: </p>
+      <p>Total price: $</p>
+      <button onclick="saveorder()">Approve</button>
+      `);
   } catch (error) {
     console.log(error);
   }
-})
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
