@@ -136,7 +136,7 @@ async function addToCart(id) {
   const data = await makeFetchRequest("/api/cart", "POST", { id });
   const products = data.product;
   products.amount = 1;
-  console.log(products);
+  //   console.log(products);
   storageService.addProductToCart(products);
 }
 
@@ -172,31 +172,71 @@ async function filterByName() {
     console.log(error);
   }
 }
-
 async function redirectToBuy() {
   try {
     const products = storageService.getProducts();
-
-    const productHash = { Banana: 0, gum: 0 };
+    const productHash = {
+      gum: 0,
+      Bread: 0,
+      Milk: 0,
+      Banana: 0,
+      Apple: 0,
+      Juice: 0,
+      Carrot: 0,
+      Corn: 0,
+      Pizza: 0,
+      PizzaXL: 0,
+      gum: 0,
+      Egg: 0,
+      Tuna: 0,
+      Butter: 0,
+    };
     for (let i = 0; i < products.length; i++) {
-      if (productHash[products[i].name]) {
-        productHash[products[i].name]++;
+      if (productHash.hasOwnProperty(products[i].productName)) {
+        productHash[products[i].productName]++;
       }
     }
+    for (let j = 0; j < productHash.length; j++) {
+      if (productHash[products[i].productName]) {
+        products.amount = productHash[i];
+      }
+    }
+    // const productHashFiltered = productHash;
+
     console.log(productHash);
-    // const filteredProducts = products.map((product) => {
-    //   if (!product._id) {
-    //   } else {
-    //     product.id;
-    //     amount++;
-    //   }
-    // });
-    // console.log(filteredProducts);
-    // window.location.href = "buy.html";
+    console.log(products);
   } catch (error) {
     console.log(error);
   }
 }
+// async function redirectToBuy() {
+//   try {
+//     const products = storageService.getProducts();
+
+//     const productHash = ["65ca608742bab825c0273790", "gum"];
+//     const productsArr = [];
+//     for (let i = 0; i < products.length; i++) {
+//       if (productHash[products[i]._id]) {
+//           products[i].push();
+//         } else if(productsArr[products[i]._id]._id){
+//             productsArr[i].amount++;
+
+//         }
+//     }
+//     console.log(products);
+//     // const filteredProducts = products.map((product) => {
+//     //   if (!product._id) {
+//     //   } else {
+//     //     product.id;
+//     //     amount++;
+//     //   }
+//     // });
+//     // console.log(filteredProducts);
+//     // window.location.href = "buy.html";
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 async function initBuy() {
   const products = storageService.getProducts();
