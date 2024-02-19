@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Document</title>
+  </head>
+  <body onload="initAll()">
+    <form onsubmit="addProduct(event)">
+      <div class="input-wrapper">
+        <label for="productName">Product name: </label>
+        <input type="text" id="productName" name="productName" />
+      </div>
+      <div class="input-wrapper">
+        <label for="productPrice">Price: </label>
+        <input type="text" id="productPrice" name="productPrice" />
+      </div>
+      <button>add product</button>
+    </form>
+    <table>
+      <thead>
+        <th>username</th>
+        <th>products</th>
+      </thead>
+      <tbody class="table"></tbody>
+    </table>
+    <script src="js/storageService.js"></script>
+    <script src="js/client.js"></script>
+  </body>
+</html>

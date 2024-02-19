@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body onload="init()">
+  <body onload="init()">
     <button class="btn-logout" onclick="logout()">Logout</button>
     <h1>Store products</h1>
     <select id="select">
-        <option value="price" id="byPrice">By price</option>
-        <option value="name" id="byName">By name</option>
+      <option value="price" id="byPrice">By price</option>
+      <option value="name" id="byName">By name</option>
     </select>
     <button onclick="chooseFilter()">Sort</button>
-    <input type="text" placeholder="Search">
-    <form onsubmit="addProduct(event)">
+    <input type="text" placeholder="Search" />
+    <!-- <form onsubmit="addProduct(event)">
         <div class="input-wrapper">
             <label for="productName">Product name: </label>
             <input type="text" id="productName" name="productName" />
@@ -27,24 +26,11 @@
             <input type="text" id="productPrice" name="productPrice" />
         </div>
         <button>add product</button>
-    </form>
-    <div class="products-list">
-        <!-- <div onclick="" class="product-container">
-            <p id="">productName</p>
-            <p id="">price</p>
-            
-        </div> -->
-    </div>
+    </form> -->
+    <div class="products-list"></div>
     <button onclick="redirectToBuy()">Buy</button>
-    
-    <!-- refrenceto buy page -->
-    <!-- <h1>SV-shop</h1> -->
-    <!-- <p>Total product: </p>
-    <p>Total price: </p>
-    <button onclick="saveorder()">Approve</button> -->
 
     <script src="js/storageService.js"></script>
     <script src="js/client.js"></script>
-</body>
-
+  </body>
 </html>

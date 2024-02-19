@@ -28,11 +28,11 @@ const storageService = {
     products.push(product);
     this.setProducts(products);
   },
-  saveMessage(message) {
-    localStorage.setItem(MSS_KEY, JSON.stringify(message));
-  },
-  getMessage() {
-    const message = JSON.parse(localStorage.getItem(MSS_KEY));
-    return message;
-  },
+  // saveMessage(message) {
+  //   localStorage.setItem(MSS_KEY, JSON.stringify(message));
+  // },
+  // getMessage() {
+  //   const message = JSON.parse(localStorage.getItem(MSS_KEY));
+  //   return message;
+  // },
 };

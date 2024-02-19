@@ -68,8 +68,8 @@ async function addProduct(event) {
     };
     const data = await makeFetchRequest("/api/newProduct", "POST", product);
 
-    const products = data.allProducts;
-    renderProducts(products);
+    // const products = data.allProducts;
+    // renderProducts(products);
   } catch (error) {
     console.log(error);
   } finally {
@@ -172,49 +172,8 @@ async function filterByName() {
     console.log(error);
   }
 }
-
-// async function redirectToBuy() {
-// try {
-//   const products = storageService.getProducts();
-
-//   const productHash = { Banana: 0, gum: 0 };
-//   for (let i = 0; i < products.length; i++) {
-//     if (productHash[products[i].name]) {
-//       productHash[products[i].name]++;
-//     }
-//   }
 async function redirectToBuy() {
   try {
-    const products = storageService.getProducts();
-    const productHash = {
-      Bread: 0,
-      Milk: 0,
-      Banana: 0,
-      Apple: 0,
-      Juice: 0,
-      Carrot: 0,
-      Corn: 0,
-      Pizza: 0,
-      PizzaXL: 0,
-      gum: 0,
-      Egg: 0,
-      Tuna: 0,
-      Butter: 0,
-    };
-    const filteredProducts = [];
-    for (let i = 0; i < products.length; i++) {
-      if (productHash.hasOwnProperty(products[i].productName)) {
-        productHash[products[i].productName]++;
-      }
-    }
-    for (const [product, quantity] of Object.entries(productHash)) {
-      if (quantity > 0) {
-        // console.log(`${product}: ${quantity}`);
-        const filteredProduct = { product: `${product} : ${quantity}` };
-        filteredProducts.push(filteredProduct);
-      }
-    }
-    console.log(filteredProducts);
     window.location.href = "buy.html";
   } catch (error) {
     console.error("Error:", error);
@@ -258,60 +217,32 @@ async function saveorder() {
     for (const [product, quantity] of Object.entries(productHash)) {
       if (quantity > 0) {
         // console.log(`${product}: ${quantity}`);
-        const filteredProduct = { product: `${product} : ${quantity}` };
+        const filteredProduct = `${product} : ${quantity}`;
         filteredProducts.push(filteredProduct);
       }
     }
 
     const user = storageService.getUser();
     const cartInfo = { filteredProducts, user };
+    console.log(cartInfo);
     const data = await makeFetchRequest("/buy", "POST", cartInfo);
-    // window.location.href = "login.html"
     alert(`Your order has been completed`);
+    logout();
   } catch (error) {
     console.log(error);
   }
 }
 
-async function cart() {
-  const user = storageService.getUser();
-
-  if (!user) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  //! refrence to shop cart on load
-
-  // const todos = storageService.getTodos()
-  // if (todos.length > 0) {
-  //   renderTodos(todos)
-  // } else {
-  //   const response = await fetch(`/api/todo?userId=${user._id}`)
-  //   const data = await response.json()
-  //   if (!data.success) return alert(data.message)
-
-  //   const loadedTodos = data.todos
-  //   if (loadedTodos || loadedTodos.length > 0) {
-  //     storageService.setTodos(loadedTodos)
-  //     renderTodos(loadedTodos)
-  //   }
-  // }
+async function initAll() {
+  const data = await makeFetchRequest("/all", "POST");
+  const orders = data.allOrders;
+  const strOrders = orders.map((objProduct) => {
+    let str = ` <tr>
+      <td>${objProduct.username}</td>
+      <td>${objProduct.products}</td>
+  </tr>`;
+    return str;
+  });
+  document.querySelector(".table").innerHTML = strOrders.join("");
+  //   console.log(orders);
 }
-
-// ! refrence to render shop cart
-// function renderTodos(todos) {
-//     //   console.log("todos in renderTodos: ", todos)
-// const strHTMLSs = todos.map((todo) => {
-//   let className = todo.isDone ? "done" : ""
-
-//   return `
-//       <div class="todo-item">
-//           <p onclick="toggleTodo('${todo._id}')" class="${className}">${todo.txt}</p>
-//           <button onclick="removeTodo('${todo._id}')">Delete</button>
-//       </div>
-//   `
-// })
-
-//     document.querySelector(".todo-list").innerHTML = strHTMLSs.join("")
-//   }

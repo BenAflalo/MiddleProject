@@ -6,6 +6,7 @@ const path = require("path");
 const validator = require("validator");
 const userModule = require("./modules/userModule.js");
 const productsModule = require("./modules/productsModule.js");
+const cartsModule = require("./modules/cartsModule.js");
 
 app.use(express.static("client"));
 app.use(express.json());
@@ -99,29 +100,42 @@ app.post("/buy", async (req, res) => {
     const userID = user._id;
     const username = user.username;
     await cartsModule.addOrder(userID, username, filteredProducts);
+    return res.send({ success: true });
   } catch (error) {
     console.log(error);
     return res.status(400).send({ success: false, message: error.message });
   }
 });
-app.get("/buy", async (req, res) => {
+
+app.get("/all", async (req, res) => {
   try {
-    // const message = `<body onload="initBuy()"><h1>SV-shop</h1></body>`
-    // return res.send({ success: true, message })
-    // return res
-    //   .status(200)
-    //   .send(`<main onload="initBuy()"><div class="container"></div></main>`);
-    return res.status(200).send(`
-      <h1>SV-shop</h1>
-      <p>Total product: </p>
-      <p>Total price: $</p>
-      <button onclick="saveorder()">Approve</button>
-      `);
+    const isAdmin = req.query.admin === "true";
+    if (isAdmin) {
+      return res.redirect("all.html").send({ success: true });
+      // res.send(`Welcome to the all page.`);
+    } else {
+      return res.status(400).send("Access denied.");
+    }
   } catch (error) {
     console.log(error);
   }
 });
-
+app.post("/all", async (req, res) => {
+  try {
+    const allOrders = await cartsModule.getAllOrders();
+    // console.log(allOrders);
+    //   const strOrders = allOrders.map((objProduct) => {
+    //     let str = ` <tr>
+    //     <td>${objProduct.username}</td>
+    //     <td>${objProduct.products}</td>
+    // </tr>`;
+    //     return str;
+    //   });
+    return res.send({ success: true, allOrders });
+  } catch (error) {
+    console.log(error);
+  }
+});
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
