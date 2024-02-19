@@ -206,7 +206,7 @@ async function redirectToBuy() {
     console.log(productHash);
     console.log(products);
   } catch (error) {
-    console.log(error);
+    console.error("Error:", error);
   }
 }
 // async function redirectToBuy() {
@@ -251,12 +251,40 @@ async function initBuy() {
 async function saveorder() {
   try {
     const products = storageService.getProducts();
+    const productHash = {
+      Bread: 0,
+      Milk: 0,
+      Banana: 0,
+      Apple: 0,
+      Juice: 0,
+      Carrot: 0,
+      Corn: 0,
+      Pizza: 0,
+      PizzaXL: 0,
+      gum: 0,
+      Egg: 0,
+      Tuna: 0,
+      Butter: 0,
+    };
+    const filteredProducts = [];
+    for (let i = 0; i < products.length; i++) {
+      if (productHash.hasOwnProperty(products[i].productName)) {
+        productHash[products[i].productName]++;
+      }
+    }
+    for (const [product, quantity] of Object.entries(productHash)) {
+      if (quantity > 0) {
+        // console.log(`${product}: ${quantity}`);
+        const filteredProduct = { product: `${product} : ${quantity}` };
+        filteredProducts.push(filteredProduct);
+      }
+    }
+
     const user = storageService.getUser();
-    const cartInfo = { products, user };
-    console.log(cartInfo);
+    const cartInfo = { filteredProducts, user };
     const data = await makeFetchRequest("/buy", "POST", cartInfo);
     // window.location.href = "login.html"
-    alert(`your order has been completed`);
+    alert(`Your order has been completed`);
   } catch (error) {
     console.log(error);
   }

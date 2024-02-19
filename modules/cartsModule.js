@@ -24,7 +24,7 @@ async function addOrder(userID, username, products) {
     username,
     products: [
       {
-        product: products.productname,
+        product: products.productName,
         price: products.price,
         amount: products.amount,
       },
