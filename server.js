@@ -95,10 +95,10 @@ app.get("/api/filterByName", async (req, res) => {
 
 app.post("/buy", async (req, res) => {
   try {
-    const { user, products } = req.body;
+    const { user, filteredProducts } = req.body;
     const userID = user._id;
     const username = user.username;
-    await cartsModule.addOrder(userID, username, products);
+    await cartsModule.addOrder(userID, username, filteredProducts);
   } catch (error) {
     console.log(error);
     return res.status(400).send({ success: false, message: error.message });
