@@ -8,27 +8,18 @@
   </head>
 
   <body onload="init()">
-    <button class="btn-logout" onclick="logout()">Logout</button>
-    <h1>Store products</h1>
-    <select id="select">
-      <option value="price" id="byPrice">By price</option>
-      <option value="name" id="byName">By name</option>
-    </select>
-    <button onclick="chooseFilter()">Sort</button>
-    <input type="text" placeholder="Search" />
-    <!-- <form onsubmit="addProduct(event)">
-        <div class="input-wrapper">
-            <label for="productName">Product name: </label>
-            <input type="text" id="productName" name="productName" />
-        </div>
-        <div class="input-wrapper">
-            <label for="productPrice">Price: </label>
-            <input type="text" id="productPrice" name="productPrice" />
-        </div>
-        <button>add product</button>
-    </form> -->
-    <div class="products-list"></div>
-    <button onclick="redirectToBuy()">Buy</button>
+    <div class="container">
+      <button class="btn-logout" onclick="logout()">Logout</button>
+      <h1>Store products</h1>
+      <select id="select">
+        <option value="price" id="byPrice">By price</option>
+        <option value="name" id="byName">By name</option>
+      </select>
+      <button onclick="chooseFilter()">Sort</button>
+      <input type="text" placeholder="Search" />
+      <div class="products-list"></div>
+      <button onclick="redirectToBuy()">Buy</button>
+    </div>
 
     <script src="js/storageService.js"></script>
     <script src="js/client.js"></script>

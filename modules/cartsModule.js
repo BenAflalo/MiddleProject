@@ -17,11 +17,5 @@ async function getAllOrders() {
   const allOrders = await collection.find().toArray();
   return allOrders;
 }
-// example for cart object = { userID, username [{productName, amount}] }
-
-async function addToCart() {}
-async function removeFromCart() {}
-async function getUserCart() {}
-async function getAllCartsByAdmin() {}
 
 module.exports = { addOrder, getAllOrders };

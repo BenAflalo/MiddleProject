@@ -1,49 +1,102 @@
 :root {
-    --bg-color: #51e2f5;
-    --bg-main: #9df9ef;
-    --bg-input: #edf7F6;
-    --bg-other: #ffa8B6;
-    --bg-buttons: #A28089;
+  --bg-color: #51e2f5;
+  --bg-main: #9df9ef;
+  --bg-input: #edf7f6;
+  --bg-other: #ffa8b6;
+  --bg-buttons: #a28089;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--bg-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-color);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: var(--bg-main);
+  /* height: 100%; */
+  padding: 10px;
+  /* display: flex;
+  flex-direction: column; */
+  /* gap: 10px; */
+  background-color: var(--bg-main);
+  border-radius: 4px;
 }
 
 input {
-    outline: none;
-    border: none;
-    background-color: var(--bg-input);
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--bg-input);
+  padding: 5px;
 }
 
 .product-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    background-color: var(--bg-other);
-    padding: 5px;
-    margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: var(--bg-other);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 4px;
 }
+
+button {
+  border: none;
+  border-radius: 4px;
+  color: var(--bg-input);
+  background-color: var(--bg-buttons);
+  font-weight: bold;
+  padding: 5px;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+.btn-logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+h1 {
+  padding: 3px;
+}
+table,
+th,
+td {
+  border: black solid 1px;
+  border-collapse: collapse;
+  padding: 5px;
+  background-color: var(--bg-other);
+}
+.total-items {
+  background-color: var(--bg-main);
+  padding: 5px;
+  border-radius: 4px;
+}
+p {
+  padding: 3px;
+}
+.product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+/* .product-list {
+  display: flex;
+  flex-direction: row;
+} */

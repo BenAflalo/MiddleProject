@@ -111,8 +111,7 @@ app.get("/all", async (req, res) => {
   try {
     const isAdmin = req.query.admin === "true";
     if (isAdmin) {
-      return res.redirect("all.html").send({ success: true });
-      // res.send(`Welcome to the all page.`);
+      return res.redirect("all.html");
     } else {
       return res.status(400).send("Access denied.");
     }
@@ -123,14 +122,6 @@ app.get("/all", async (req, res) => {
 app.post("/all", async (req, res) => {
   try {
     const allOrders = await cartsModule.getAllOrders();
-    // console.log(allOrders);
-    //   const strOrders = allOrders.map((objProduct) => {
-    //     let str = ` <tr>
-    //     <td>${objProduct.username}</td>
-    //     <td>${objProduct.products}</td>
-    // </tr>`;
-    //     return str;
-    //   });
     return res.send({ success: true, allOrders });
   } catch (error) {
     console.log(error);

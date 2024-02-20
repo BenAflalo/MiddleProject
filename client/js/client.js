@@ -67,9 +67,6 @@ async function addProduct(event) {
       productName,
     };
     const data = await makeFetchRequest("/api/newProduct", "POST", product);
-
-    // const products = data.allProducts;
-    // renderProducts(products);
   } catch (error) {
     console.log(error);
   } finally {
@@ -203,7 +200,7 @@ async function saveorder() {
       Corn: 0,
       Pizza: 0,
       PizzaXL: 0,
-      gum: 0,
+      Gum: 0,
       Egg: 0,
       Tuna: 0,
       Butter: 0,
@@ -216,7 +213,6 @@ async function saveorder() {
     }
     for (const [product, quantity] of Object.entries(productHash)) {
       if (quantity > 0) {
-        // console.log(`${product}: ${quantity}`);
         const filteredProduct = `${product} : ${quantity}`;
         filteredProducts.push(filteredProduct);
       }
@@ -244,5 +240,4 @@ async function initAll() {
     return str;
   });
   document.querySelector(".table").innerHTML = strOrders.join("");
-  //   console.log(orders);
 }
