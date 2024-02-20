@@ -8,18 +8,22 @@
   </head>
 
   <body onload="init()">
-    <div class="container">
-      <button class="btn-logout" onclick="logout()">Logout</button>
-      <h1>Store products</h1>
-      <select id="select">
-        <option value="price" id="byPrice">By price</option>
-        <option value="name" id="byName">By name</option>
-      </select>
-      <button onclick="chooseFilter()">Sort</button>
-      <input type="text" placeholder="Search" />
-      <div class="products-list"></div>
-      <button onclick="redirectToBuy()">Buy</button>
-    </div>
+    <button class="btn-logout" onclick="logout()">Logout</button>
+    <h1>Store products</h1>
+    <select id="select">
+      <option value="price" id="byPrice">By price</option>
+      <option value="name" id="byName">By name</option>
+    </select>
+    <button onclick="chooseFilter()">Sort</button>
+    <input
+      type="text"
+      id="searchInput"
+      oninput="searchProducts()"
+      placeholder="Search"
+    />
+
+    <div class="products-list"></div>
+    <button onclick="redirectToBuy()">Buy</button>
 
     <script src="js/storageService.js"></script>
     <script src="js/client.js"></script>

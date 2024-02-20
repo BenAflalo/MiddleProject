@@ -84,6 +84,15 @@ app.get("/api/filterByPrice", async (req, res) => {
     return res.status(400).send({ success: false, message: error.message });
   }
 });
+app.get("/api/filterBySearchBar", async (req, res) => {
+  try {
+    const allFilteredProducts = await productsModule.getProducts();
+    return res.send({ success: true, allFilteredProducts });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ success: false, message: error.message });
+  }
+});
 app.get("/api/filterByName", async (req, res) => {
   try {
     const allFilteredProducts = await productsModule.getProductsByName();

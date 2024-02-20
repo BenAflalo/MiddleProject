@@ -241,3 +241,22 @@ async function initAll() {
   });
   document.querySelector(".table").innerHTML = strOrders.join("");
 }
+
+async function searchProducts() {
+  try {
+    const data = await makeFetchRequest("/api/filterBySearchBar");
+    const products = data.allFilteredProducts;
+    const searchInput = document.getElementById("searchInput");
+    const query = searchInput.value.toLowerCase().trim();
+
+    const productsList = document.querySelector(".products-list");
+    productsList.innerHTML = "";
+
+    const filteredProducts = products.filter((product) => {
+      return product.productName.toLowerCase().includes(query);
+    });
+    renderProducts(filteredProducts);
+  } catch (error) {
+    console.error("Error searching products:", error);
+  }
+}
