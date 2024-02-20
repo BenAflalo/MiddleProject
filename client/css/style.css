@@ -19,6 +19,14 @@ body {
   transform: translate(-50%, -50%);
   background-color: var(--bg-color);
   font-family: Arial, Helvetica, sans-serif;
+  background: white;
+  background-image: linear-gradient(
+      90deg,
+      rgba(200, 0, 0, 0.5) 50%,
+      transparent 0
+    ),
+    linear-gradient(rgba(200, 0, 0, 0.5) 50%, transparent 0);
+  background-size: 30px 30px;
 }
 
 form {
@@ -29,10 +37,34 @@ form {
 }
 
 .container {
-  /* height: 100%; */
+  /* height: 100%;
   padding: 10px;
-  background-color: var(--bg-main);
-  border-radius: 4px;
+  /* display: flex;
+  flex-direction: column; */
+  /* gap: 10px; */
+  /* background-color: var(--bg-main);
+  border-radius: 4px; */
+  --s: 50px;
+  --c: white;
+  --_s: calc(2 * var(--s)) calc(2 * var(--s));
+  --_g: 35.36% 35.36% at;
+  --_c: #00000000 66%, grey 68% 70%, #0000 72%;
+  background: radial-gradient(var(--_g) 100% 25%, var(--_c)) var(--s) var(--s) /
+      var(--_s),
+    radial-gradient(var(--_g) 0 75%, var(--_c)) var(--s) var(--s) / var(--_s),
+    radial-gradient(var(--_g) 100% 25%, var(--_c)) 0 0 / var(--_s),
+    radial-gradient(var(--_g) 0 75%, var(--_c)) 0 0 / var(--_s),
+    repeating-conic-gradient(var(--c) 0 25%, #0000 0 50%) 0 0 / var(--_s),
+    radial-gradient(var(--_c)) 0 calc(var(--s) / 2) / var(--s) var(--s) var(--c);
+  background-attachment: fixed;
+}
+#searchInput {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 20px;
+  font-size: 16px;
+  outline: none;
 }
 
 input {
@@ -47,29 +79,132 @@ input {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   background-color: var(--bg-other);
 
   padding: 5px;
   margin: 5px;
   border-radius: 4px;
 }
-
-button {
-  border: none;
+.selectContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#homeBtn {
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, #fff, #f8eedb);
+  border: 0 solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #482307;
+  column-gap: 1rem;
+  cursor: pointer;
+  display: flex;
+  font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 2px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  outline: 2px solid transparent;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  text-transform: none;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1),
+    0px 2px 2px rgba(81, 41, 10, 0.2);
+}
+.btn-logout {
+  position: relative;
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, #fff, #f8eedb);
+  border: 0 solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #482307;
+  column-gap: 1rem;
+  cursor: pointer;
+  display: flex;
+  font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 4px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  outline: 2px solid transparent;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  text-transform: none;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1),
+    0px 2px 2px rgba(81, 41, 10, 0.2);
+}
+#loginBtn {
+  /* border: none;
   border-radius: 4px;
   color: var(--bg-input);
   background-color: var(--bg-buttons);
   font-weight: bold;
   padding: 5px;
   margin-bottom: 3px;
-  margin-top: 3px;
+  margin-top: 3px; */
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, #fff, #f8eedb);
+  border: 0 solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #482307;
+  column-gap: 1rem;
+  cursor: pointer;
+  display: flex;
+  font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 100%;
+  font-weight: 700;
+  line-height: normal;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  outline: 2px solid transparent;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  text-transform: none;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: -6px 8px 10px rgba(81, 41, 10, 0.1),
+    0px 2px 2px rgba(81, 41, 10, 0.2);
 }
-/* .btn-logout {
-  position: relative;
-  top: 0;
-  right: 0;
-} */
+.button:active {
+  background-color: #f3f4f6;
+  box-shadow: -1px 2px 5px rgba(81, 41, 10, 0.15),
+    0px 1px 1px rgba(81, 41, 10, 0.15);
+  transform: translateY(0.125rem);
+}
+
+.button:focus {
+  box-shadow: rgba(72, 35, 7, 0.46) 0 0 0 4px,
+    -6px 8px 10px rgba(81, 41, 10, 0.1), 0px 2px 2px rgba(81, 41, 10, 0.2);
+}
+
 h1 {
   padding: 3px;
   text-shadow: 2px 2px 5px rgb(231, 80, 80);
@@ -99,3 +234,65 @@ p {
   display: flex;
   flex-direction: row;
 } */
+@media (max-width: 570px) {
+}
+.select-wrapper {
+  width: 200px; /* Adjust width as needed */
+  position: relative;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  appearance: none; /* Remove default arrow */
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Styling for the arrow */
+.select-wrapper::after {
+  content: "\25BC"; /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Make the arrow not clickable */
+}
+
+/* Optional hover style */
+.select-wrapper:hover select {
+  border-color: #999;
+}
+
+store-header {
+  text-align: center;
+  padding: 40px 0;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.store-header h1 {
+  font-size: 48px;
+  color: #343a40;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+@keyframes slideIn {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.store-header {
+  animation: slideIn 0.5s ease-out;
+}
