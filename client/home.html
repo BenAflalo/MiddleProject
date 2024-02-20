@@ -15,18 +15,13 @@
       <option value="name" id="byName">By name</option>
     </select>
     <button onclick="chooseFilter()">Sort</button>
-    <input type="text" placeholder="Search" />
-    <!-- <form onsubmit="addProduct(event)">
-        <div class="input-wrapper">
-            <label for="productName">Product name: </label>
-            <input type="text" id="productName" name="productName" />
-        </div>
-        <div class="input-wrapper">
-            <label for="productPrice">Price: </label>
-            <input type="text" id="productPrice" name="productPrice" />
-        </div>
-        <button>add product</button>
-    </form> -->
+    <input
+      type="text"
+      id="searchInput"
+      oninput="searchProducts()"
+      placeholder="Search"
+    />
+
     <div class="products-list"></div>
     <button onclick="redirectToBuy()">Buy</button>
 
