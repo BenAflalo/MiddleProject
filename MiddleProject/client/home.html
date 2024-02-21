@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Document</title>
+  </head>
+
+  <body onload="init()">
+    <div class="container">
+      <button class="btn-logout" onclick="logout()">Logout</button>
+      <h1 class="store-header">Store products</h1>
+      <div class="selectContainer">
+        <div class="select-wrapper">
+          <select id="select">
+            <option value="price" id="byPrice">By price</option>
+            <option value="name" id="byName">By name</option>
+          </select>
+        </div>
+        <button id="homeBtn" onclick="chooseFilter()">Sort</button>
+      </div>
+      <br />
+      <input
+        id="searchInput"
+        type="text"
+        id="searchInput"
+        oninput="searchProducts()"
+        placeholder="Search"
+      />
+
+      <div class="products-list"></div>
+      <button id="buyBtn" onclick="redirectToBuy()">Buy</button>
+    </div>
+
+    <script src="js/storageService.js"></script>
+    <script src="js/client.js"></script>
+  </body>
+</html>
