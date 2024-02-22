@@ -182,8 +182,10 @@ async function initBuy() {
   const totalProducts = products.length;
   const totalPrice = products.reduce((a, b) => a + b.price, 0);
   const strHTMLSs = `
+  <h1>SV-shop</h1>
   <p>Total product: ${totalProducts}</p>
   <p>Total price: ${totalPrice}$</p>
+  <button id="approveBtn" onclick="saveorder()">Approve</button>
   `;
   document.querySelector(".total-items").innerHTML = strHTMLSs;
 }

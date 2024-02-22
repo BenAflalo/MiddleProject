@@ -7,34 +7,39 @@
     <title>Document</title>
   </head>
   <body onload="initAll()">
-    <form onsubmit="addProduct(event)">
-      <div class="input-wrapper">
-        <label for="productName">Product name: </label>
-        <input
-          type="text"
-          id="productName"
-          name="productName"
-          placeholder="Name of the product"
-        />
-      </div>
-      <div class="input-wrapper">
-        <label for="productPrice">Price: </label>
-        <input
-          type="text"
-          id="productPrice"
-          name="productPrice"
-          placeholder="Price to be sold"
-        />
-      </div>
-      <button>add product</button>
-    </form>
-    <table>
-      <thead>
-        <th>username</th>
-        <th>products</th>
-      </thead>
-      <tbody class="table"></tbody>
-    </table>
+    <div class="container">
+      <form onsubmit="addProduct(event)">
+        <div class="input-wrapper">
+          <label for="productName">Product name: </label>
+          <input
+            type="text"
+            id="productName"
+            name="productName"
+            placeholder="Name of the product"
+          />
+        </div>
+
+        <div class="input-wrapper">
+          <label for="productPrice">Price: </label>
+          <input
+            type="text"
+            id="productPrice"
+            name="productPrice"
+            placeholder="Price to be sold"
+          />
+        </div>
+        <button id="addProductBtn">add product</button>
+      </form>
+      <br />
+      <h1>Incomeing Orders</h1>
+      <table>
+        <thead>
+          <th>username</th>
+          <th>products</th>
+        </thead>
+        <tbody class="table"></tbody>
+      </table>
+    </div>
     <script src="js/storageService.js"></script>
     <script src="js/client.js"></script>
   </body>
